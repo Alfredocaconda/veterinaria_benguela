@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Caderneta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\QueryException;
 
 class CadernetaController extends Controller
 {
@@ -46,11 +48,8 @@ class CadernetaController extends Controller
             if ($request->filled('id')) {
                 $CadernetaExistente = Caderneta::find($request->id);
                 if (!$CadernetaExistente) {
-                    return redirect()->back()->with("ERRO", "FUNCIONÁRIO NÃO ENCONTRADO");
+                    return redirect()->back()->with("ERRO", "CADERNETA NÃO ENCONTRADO");
                 }
-
-                $rules['email'] = 'required|email|unique:Cadernetas,email,' . $request->id;
-                $rules['telefone'] = 'required|digits:9|unique:Cadernetas,telefone,' . $request->id;
             }
 
             // Validação
@@ -60,7 +59,7 @@ class CadernetaController extends Controller
             $valor = $request->filled('id') 
                 ? Caderneta::find($request->id) 
                 : new Caderneta();
-                
+             
             $valor->nome_proprietario = $request->nome_proprietario;
             $valor->endereco = $request->endereco;
             $valor->provincia = $request->provincia;
@@ -74,47 +73,34 @@ class CadernetaController extends Controller
             $valor->ondulada = $request->ondulada;
             $valor->cor = $request->cor;
             $valor->cauda_comprida = $request->cauda_comprida;
-            $valor->n_registo = $request->n_registo;
             $valor->data = now();
-            $valor->id_funcionario = Auth::guard('funcionario')->user()->id;
+            $valor->id_funcionario = Auth::guard('funcionario')->id();
             $valor->save();
 
-            return redirect()->back()->with("SUCESSO", $request->filled('id') ? "FUNCIONÁRIO ACTUALIZADO COM SUCESSO" : "FUNCIONÁRIO CADASTRADO COM SUCESSO");
+            return redirect()->back()->with("SUCESSO", $request->filled('id') ? "CADERNETA DE VACINAÇÃO ACTUALIZADO COM SUCESSO" : "CADERNETA DE VACINAÇÃO CADASTRADO COM SUCESSO");
 
         } catch (QueryException $e) {
-            return redirect()->back()->with("ERRO", "ERRO AO SALVAR FUNCIONÁRIO. TENTE NOVAMENTE");
+            return redirect()->back()->with("ERRO", "ERRO AO SALVAR CADERNETA DE VACINAÇÃO. TENTE NOVAMENTE");
         }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Caderneta $caderneta)
+   public function show( $id)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Caderneta $caderneta)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Caderneta $caderneta)
-    {
-        //
+        $valor=Caderneta::find($id);
+        return view("pages.caderneta",compact("valor"));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Caderneta $caderneta)
+    public function apagar( $id)
     {
         //
+        Caderneta::find($id)->delete();
+        return redirect()->back()->with("SUCESSO","CADERNETA DE VACINAÇÃO ELIMINADO");
     }
 }

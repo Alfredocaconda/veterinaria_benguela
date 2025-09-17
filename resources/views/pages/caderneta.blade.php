@@ -31,6 +31,8 @@
                             <th>Pelagem</th>
                             <th>Ondulada</th>
                             <th>Cor/Cauda Comprida</th>
+                            <th>Nº do Registro</th>
+                            <th>Data</th>
                             <th>Opões</th>
                         </tr>
                     </thead>
@@ -38,12 +40,23 @@
                         @foreach ($valor as $func)
                             <tr>
                                 <td>{{$func->nome_proprietario}}</td>
-                                <td>{{$func->endereco+"/"+provincia}}</td>
-                                <td>{{$func->nome_animal+"/"+genero_animal+"/"+especie+"/"+raca+"/"+idade_animal+"/microchip_n"}}</td>
+                                <td>{{$func->endereco."/".$func->provincia}}</td>
+                               <td>
+                                    {{ 
+                                        $func->nome_animal . "/" . 
+                                        $func->genero_animal . "/" . 
+                                        $func->especie . "/" . 
+                                        $func->raca . "/" . 
+                                        $func->idade_animal ."Anos" . "/" . 
+                                        $func->microchip_n
+                                    }}
+                                </td>
+
                                 <td>{{$func->pelagem_comprida}}</td>
                                 <td>{{$func->ondulada}}</td>
-                                <td>{{$func->cor+"/"+cauda_comprida}}</td>
-                                <td>{{$func->n_registo+"/"+data}}</td>
+                                <td>{{$func->cor."/".$func->cauda_comprida}}</td>
+                                <td>{{$func->n_registo}}</td>
+                                <td>{{$func->data}}</td>
                                 <td>
                                     <a href="#Cadastrar" data-toggle="modal" class="text-primary" onclick="editar({{ json_encode($func) }})"><i class="fa fa-edit"></i></a>
                                     <a href="{{route('cadern.apagar',$func->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
@@ -91,7 +104,7 @@
                             <x-input-normal id="nome_proprietario" name="nome_proprietario" type="text" titulo="Nome Completo" alert="" />
                             <x-input-normal id="endereco" name="endereco" type="text" titulo="Bairro/Município" alert="" />
                             <x-input-normal id="provincia" name="provincia" type="text" titulo="Província" alert="" />
-                            <x-input-normal id="provincia" name="nome_animal" type="text" titulo="Nome do Animal" alert="" />
+                            <x-input-normal id="nome_animal" name="nome_animal" type="text" titulo="Nome do Animal" alert="" />
                             <div class="form-group col-12 col-md-6 col-lg-6">
                                 <label for="genero_animal">Genero Animal <span style="color: red;">*</span></label>
                                 <div class="form-input">
@@ -111,7 +124,7 @@
                                     <input type="text" 
                                            class="form-control" 
                                            name="idade_animal" 
-                                           id="idade" 
+                                           id="idade_animal" 
                                            maxlength="2" 
                                            oninput="formatidade(this)" 
                                            placeholder="XX">
@@ -175,18 +188,15 @@
         document.getElementById('endereco').value = valor.endereco || '';
         document.getElementById('provincia').value = valor.provincia || '';
         document.getElementById('nome_animal').value = valor.nome_animal || '';
-        document.getElementById('idade').value = valor.idade || '';
+        document.getElementById('idade_animal').value = valor.idade_animal || '';
         document.getElementById('genero_animal').value = valor.genero_animal || '';
         document.getElementById('cor').value = valor.cor || '';
         document.getElementById('ondulada').value = valor.ondulada || '';
         document.getElementById('pelagem_comprida').value = valor.pelagem_comprida || '';
         document.getElementById('microchip_n').value = valor.microchip_n || '';
-        document.getElementById('idade_animal').value = valor.idade_animal || '';
         document.getElementById('raca').value = valor.raca || '';
         document.getElementById('cauda_comprida').value = valor.cauda_comprida || '';
         document.getElementById('especie').value = valor.especie || '';
-        document.getElementById('data').value = valor.data || '';
-        document.getElementById('n_registo').value = valor.n_registo || '';
 
 
         // Modificar a URL do formulário para apontar para update se for edição
@@ -202,22 +212,18 @@
 
     function limpar() {
         document.getElementById('id').value = "";
-        document.getElementById('nome_proprietario').value = "";
         document.getElementById('endereco').value = "";
         document.getElementById('provincia').value = "";
         document.getElementById('nome_animal').value = "";
-        document.getElementById('idade').value = "";
+        document.getElementById('idade_animal').value = "";
         document.getElementById('genero_animal').value = "";
         document.getElementById('cor').value = "";
         document.getElementById('ondulada').value = "";
         document.getElementById('pelagem_comprida').value = "";
         document.getElementById('microchip_n').value = "";
-        document.getElementById('idade_animal').value = "";
         document.getElementById('raca').value = "";
         document.getElementById('cauda_comprida').value = "";
         document.getElementById('especie').value = "";
-        document.getElementById('data').value = "";
-        document.getElementById('n_registo').value = "";
     }
             function formatBI(input) {
         let value = input.value.toUpperCase(); // Converte letras para maiúsculas
