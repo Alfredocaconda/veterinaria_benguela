@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('tratamentos', function (Blueprint $table) {
             $table->id();
+            $table->string('tratamento');
+            $table->string('desparasitacao');
+            $table->string('data');
+            $table->string('id_funcionario')->constrained('funcionario')->onDelete('cascade');
             $table->timestamps();
         });
     }

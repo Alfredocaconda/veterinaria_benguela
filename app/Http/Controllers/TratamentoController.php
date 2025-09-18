@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Caderneta;
 use App\Models\Tratamento;
 use Illuminate\Http\Request;
 
@@ -10,9 +11,8 @@ class TratamentoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
+    public function index(){
+        return view("pages.tratamento");
     }
 
     /**
@@ -34,32 +34,20 @@ class TratamentoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Tratamento $tratamento)
+   public function show( $id)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Tratamento $tratamento)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Tratamento $tratamento)
-    {
-        //
+        $valor=Tratamento::find($id);
+        return view("pages.tratamento",compact("valor"));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tratamento $tratamento)
+    public function apagar( $id)
     {
         //
+        Tratamento::find($id)->delete();
+        return redirect()->back()->with("SUCESSO","TRATAMENTO ELIMINADO");
     }
 }

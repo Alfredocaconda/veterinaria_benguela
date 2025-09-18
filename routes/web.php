@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     CadernetaController,
     FuncionarioController,
+    TratamentoController,
 };
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
@@ -22,6 +23,9 @@ Route::middleware('auth:funcionario')->group(function () {
     Route::resource('cadern', CadernetaController::class);
     Route::get('apagar/{id}/cadern', [CadernetaController::class, 'apagar'])
         ->name('cadern.apagar');
+    Route::resource('trat', TratamentoController::class);
+    Route::get('apagar/{id}/trat', [TratamentoController::class, 'apagar'])
+        ->name('trat.apagar');
 });
 
        

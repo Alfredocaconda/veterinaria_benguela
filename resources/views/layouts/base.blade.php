@@ -69,9 +69,9 @@
                           </a>
                       </li>
                       <li class=" ">
-                        <a href="" class="svg-icon">
+                        <a href="{{route('trat.index')}}" class="svg-icon">
                             <i class="fa fa-envelope"></i>
-                              <span class="ml-4">Faltas</span>
+                              <span class="ml-4">Tratamento</span>
                           </a>
                       </li>
                      
