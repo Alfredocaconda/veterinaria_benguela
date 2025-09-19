@@ -21,3 +21,37 @@
         }
     }
 }
+.header-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    a{
+        font-size: 30px;
+    }
+}
+
+.base-rotas{
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    .rotas{
+        border: 1px solid dimgray;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        background-color: #f0f0f0;
+        h4{
+            font-size: 14pt;
+            line-height: 20px;
+            font-weight: 600;
+            color: black;
+        }
+        h5{
+            font-size: 15px;
+            font-weight: 600;
+            color: black;
+        }
+    }
+}
+
