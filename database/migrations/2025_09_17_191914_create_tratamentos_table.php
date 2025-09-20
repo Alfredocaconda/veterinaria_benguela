@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('tratamento');
             $table->string('desparasitacao');
             $table->string('data');
+            $table->string('id_caderneta')->constrained('caderneta')->onDelete('cascade');
             $table->string('id_funcionario')->constrained('funcionario')->onDelete('cascade');
             $table->timestamps();
         });

@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>VETERINÁRIA BENGUELA</title>
@@ -12,7 +12,9 @@
       <link rel="stylesheet" href="{{asset('css/master.css')}}">
       <link rel="stylesheet" href="{{asset('vendor/@fortawesome/fontawesome-free/css/all.min.css')}}">
       <link rel="stylesheet" href="{{asset('vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css')}}">
-      <link rel="stylesheet" href="{{asset('vendor/remixicon/fonts/remixicon.css')}}">  </head>
+      <link rel="stylesheet" href="{{asset('vendor/remixicon/fonts/remixicon.css')}}"> 
+ 
+</head>
   <body class="  ">
     @php
         $funcionario = Auth::guard('funcionario')->user();
