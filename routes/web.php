@@ -4,6 +4,7 @@ use App\Http\Controllers\{
     CadernetaController,
     FuncionarioController,
     TratamentoController,
+    VacinacaoRaivaController,
 };
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
@@ -16,7 +17,9 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 
 // Rotas protegidas por autenticação
 Route::middleware('auth:funcionario')->group(function () {
-    Route::get('/', fn() => view('pages.index'))->name('index');
+    Route::get('/', function () {
+        return view('pages.index');
+    })->name('index');
     Route::resource('funcio', FuncionarioController::class);
     Route::get('apagar/{id}/funcio', [FuncionarioController::class, 'apagar'])
         ->name('funcio.apagar');
@@ -26,6 +29,9 @@ Route::middleware('auth:funcionario')->group(function () {
     Route::resource('trat', TratamentoController::class);
     Route::get('apagar/{id}/trat', [TratamentoController::class, 'apagar'])
         ->name('trat.apagar');
+    Route::resource('vaci', VacinacaoRaivaController::class);
+    Route::get('apagar/{id}/vaci', [VacinacaoRaivaController::class, 'apagar'])
+        ->name('vaci.apagar');
 });
 
        

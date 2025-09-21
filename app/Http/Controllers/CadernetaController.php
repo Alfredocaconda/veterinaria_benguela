@@ -22,8 +22,7 @@ class CadernetaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-   public function store(Request $request)
-    {
+   public function store(Request $request){
         try {
             // Regras de validação
              //DEFINIR REGRAS DE VALIDAÇÃO
@@ -87,7 +86,7 @@ class CadernetaController extends Controller
     /**
      * Display the specified resource.
      */
-   public function show( $id)
+    public function show( $id)
     {
         //
         $valor=Caderneta::find($id);

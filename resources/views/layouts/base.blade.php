@@ -28,93 +28,71 @@
     <!-- Wrapper Start -->
     <div class="wrapper">
 
-      <!-- Menu da aplicação -->
-      <div class="iq-sidebar  sidebar-default ">
+        <!-- Menu da aplicação -->
+        <div class="iq-sidebar  sidebar-default ">
           <div class="iq-sidebar-logo d-flex align-items-center justify-content-between">
-              <a href="" class="header-logo">
+              <a href="/" class="header-logo">
                   <img src="{{asset('images/logo.png')}}" class="img-fluid rounded-normal light-logo" alt="logo"><h5 class="logo-title light-logo ml-3">VETERINÁRIA BENGUELA</h5>
               </a>
               <div class="iq-menu-bt-sidebar ml-0">
                   <i class="las la-bars wrapper-menu"></i>
               </div>
           </div>
-          <div class="data-scrollbar" data-scroll="1">
-              <nav class="iq-sidebar-menu">
-                  <ul id="iq-sidebar-toggle" class="iq-menu">
-                    <li class="active">
-                        <a href="" class="svg-icon">
-                            <svg  class="svg-icon" id="p-dash1" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line>
-                            </svg>
-                            <span class="ml-4">Dashboards</span>
-                        </a>
-                    </li>
-                    @if($funcionario?->cargo === 'Diretor')
-                      <li class=" ">
-                          <a href="" class="svg-icon">
-                            <i class="fa fa-user"></i>
-                              <span class="ml-4">Utilizador</span>
-                          </a>
-                      </li>
-                      <li class=" ">
-                        <a href="{{route('funcio.index')}}" class="svg-icon">
-                            <i class="fa fa-users"></i>
-                              <span class="ml-4">Funcionario</span>
-                          </a>
-                      </li>
-                      @endif
-                      <!-- INFORMACAO DA SECRETARIA QUE TERAO ACESSO-->
-                      <li class=" ">
-                        <a href="{{route('cadern.index')}}" class="svg-icon">
-                            <i class="fa fa-money-bill"></i>
-                              <span class="ml-4">Caderneta de Vacinação</span>
-                          </a>
-                      </li>
-                      <li class=" ">
-                        <a href="{{route('trat.index')}}" class="svg-icon">
-                            <i class="fa fa-envelope"></i>
-                              <span class="ml-4">Tratamento</span>
-                          </a>
-                      </li>
-                     
-                      <li class=" ">
-                        <a href="" class="svg-icon">
-                            <i class="fa fa-users"></i>
-                              <span class="ml-4">Estudante</span>
-                          </a>
-                      </li>
-                      <li class=" ">
-                        <a href="" class="svg-icon">
-                            <i class="fa fa-briefcase"></i>
-                              <span class="ml-4">Disciplinas</span>
-                          </a>
-                      </li>
-                      
-                      <li class=" ">
-                        <a href="" class="svg-icon">
-                            <i class="fa fa-list-alt"></i>
-                              <span class="ml-4">Matrículas</span>
-                          </a>
-                      </li>
-                      <li class=" ">
-                        <a href="" class="svg-icon">
-                            <i class="fa fa-list-alt"></i>
-                              <span class="ml-4">Classes</span>
-                          </a>
-                      </li>
-                      <li class=" ">
-                        <a href="" class="svg-icon">
-                            <i class="fa fa-file"></i>
-                              <span class="ml-4">Turma</span>
-                          </a>
-                      </li>
-                  </ul>
-              </nav>
+            <div class="data-scrollbar" data-scroll="1">
+                <nav class="iq-sidebar-menu">
+                    <ul id="iq-sidebar-toggle" class="iq-menu">
+                        <!-- Dashboard sempre visível -->
+                        <li class="active">
+                            <a href="/" class="svg-icon">
+                                <svg class="svg-icon" id="p-dash1" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                    <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                                </svg>
+                                <span class="ml-4">Dashboards</span>
+                            </a>
+                        </li>
 
-              <div class="p-3"></div>
-          </div>
-          </div>      <div class="iq-top-navbar">
-          <div class="iq-navbar-custom">
+                        <!-- Só Diretor pode acessar cadastro de funcionários -->
+                        @if($funcionario?->cargo === 'Diretor')
+                            <li>
+                                <a href="{{ route('funcio.index') }}" class="svg-icon">
+                                    <i class="fa fa-users"></i>
+                                    <span class="ml-4">Funcionários</span>
+                                </a>
+                            </li>
+                        @endif
+
+                        <!-- Itens que Diretor e Secretário podem acessar -->
+                        @if(in_array($funcionario?->cargo, ['Diretor', 'Secretario']))
+                            <li>
+                                <a href="{{ route('cadern.index') }}" class="svg-icon">
+                                    <i class="fa fa-file"></i>
+                                    <span class="ml-4">Caderneta de Vacinação</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('trat.index') }}" class="svg-icon">
+                                    <i class="fa fa-list-alt"></i>
+                                    <span class="ml-4">Tratamento</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('vaci.index') }}" class="svg-icon">
+                                    <i class="fa fa-syringe"></i>
+                                    <span class="ml-4">Vacinação</span>
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
+                </nav>
+            </div>
+
+        </div>      
+        <div class="iq-top-navbar">
+            <div class="iq-navbar-custom">
               <nav class="navbar navbar-expand-lg navbar-light p-0">
                   <div class="iq-navbar-logo d-flex align-items-center justify-content-between">
                       <i class="ri-menu-line wrapper-menu"></i>
@@ -126,76 +104,75 @@
                   </div>
                   <div class="iq-search-bar device-search">
 
-                  </div>
-                  <div class="d-flex align-items-center">
-                      <button class="navbar-toggler" type="button" data-toggle="collapse"
-                          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                          aria-label="Toggle navigation">
-                          <i class="ri-menu-3-line"></i>
-                      </button>
-                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                          <ul class="navbar-nav ml-auto navbar-list align-items-center">
-                            @if($funcionario?->cargo === 'Funcionario')
-                            <li class="nav-item nav-icon search-content">
-                                  <a href="#" class="search-toggle rounded" id="dropdownSearch" data-toggle="dropdown"
-                                      aria-haspopup="true" aria-expanded="false">
-                                      <i class="ri-search-line"></i>
-                                  </a>
-                                  @else
-                                  <div class="iq-search-bar iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownSearch">
-                                      <form action="#" class="searchbox p-2">
-                                          <div class="form-group mb-0 position-relative">
-                                              <input type="text" class="text search-input font-size-12"
-                                                  placeholder="type here to search...">
-                                              <a href="#" class="search-link"><i class="las la-search"></i></a>
-                                          </div>
-                                      </form>
-                                  </div>
-                                </li>
-                                @endif
-                              <li class="nav-item nav-icon dropdown caption-content">
-                                  <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton4"
-                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                      <img src="{{asset('images/user/1.png')}}" class="img-fluid rounded" alt="user">
-                                  </a>
-                                  <div class="iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                      <div class="card shadow-none m-0">
-                                          <div class="card-body p-0 text-center">
-                                              <div class="media-body profile-detail text-center">
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-label="Toggle navigation">
+                            <i class="ri-menu-3-line"></i>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto navbar-list align-items-center">
+                                @if($funcionario?->cargo === 'Funcionario')
+                                <li class="nav-item nav-icon search-content">
+                                    <a href="#" class="search-toggle rounded" id="dropdownSearch" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <i class="ri-search-line"></i>
+                                    </a>
+                                        @else
+                                    <div class="iq-search-bar iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownSearch">
+                                        <form action="#" class="searchbox p-2">
+                                            <div class="form-group mb-0 position-relative">
+                                                <input type="text" class="text search-input font-size-12"
+                                                    placeholder="type here to search...">
+                                                <a href="#" class="search-link"><i class="las la-search"></i></a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    </li>
+                                    @endif
+                                    <li class="nav-item nav-icon dropdown caption-content">
+                                        <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton4"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="{{asset('images/user/1.png')}}" class="img-fluid rounded" alt="user">
+                                        </a>
+                                    <div class="iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <div class="card shadow-none m-0">
+                                            <div class="card-body p-0 text-center">
+                                                <div class="media-body profile-detail text-center">
                                                   <img src="{{asset('images/page-img/profile-bg.jpg')}}" alt="profile-bg"
                                                       class="rounded-top img-fluid mb-4">
                                                   <img src="{{asset('images/user/1.png')}}" alt="profile-img"
                                                       class="rounded profile-img img-fluid avatar-70">
-                                              </div>
+                                                </div>
                                               <div class="p-3">
-                                                  <h5 class="mb-1">{{$funcionario?->nome}}</h5>
+                                                  <h5 class="mb-1">{{$funcionario?->name}}</h5>
                                                   @if($funcionario?->cargo === 'Diretor')
                                                     <p class="mb-0">{{$funcionario?->cargo}}</p>
                                                   @else
                                                     <p class="mb-0">{{$funcionario?->cargo}}</p>
                                                   @endif
-                                                  <div class="d-flex align-items-center justify-content-center mt-3">
-                                                      <a href="app/user-profile.html" class="btn border mr-2">Perfil</a>
-                                                      <a class="btn border" href="{{ route('logout') }}"
-                                                      onclick="event.preventDefault();
-                                                                    document.getElementById('logout-form').submit();">
-                                                       {{ __('Sair') }}
-                                                   </a>
-                                                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                                       @csrf
-                                                   </form>
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </li>
-                          </ul>
-                      </div>
-                  </div>
-              </nav>
-          </div>
-      </div>
+                                                    <div class="d-flex align-items-center justify-content-center mt-3">
+                                                        <a class="btn border" href="{{ route('logout') }}"
+                                                            onclick="event.preventDefault();
+                                                                            document.getElementById('logout-form').submit();">
+                                                            {{ __('Sair') }}
+                                                        </a>
+                                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                            @csrf
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
       <div class="modal fade" id="new-order" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">

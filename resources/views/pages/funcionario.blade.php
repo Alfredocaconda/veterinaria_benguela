@@ -119,7 +119,7 @@
                             </div>                        
                             <x-select name="cargo">
                                 <option value="Diretor">Diretor</option>
-                                <option value="Veterinaria">Veterinário</option>
+                                <option value="Veterinario">Veterinário (a)</option>
                                 <option value="Secretario">Secretário</option>
                             </x-select>  
                             <x-input-normal id="senha" name="senha" type="password" titulo="Senha" alert="" />

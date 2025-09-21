@@ -4,13 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tratamento extends Model
+class Vacinacao_raiva extends Model
 {
     //
       public function funcionario(){
         return $this->belongsTo(Funcionario::class,'id_funcionario');
     }
-      public function caderneta(){
-        return $this->belongsTo(Caderneta::class,'id_caderneta');
+      public function vacinadorFuncionario()
+    {
+        return $this->belongsTo(Funcionario::class, 'vacinador');
     }
+
 }

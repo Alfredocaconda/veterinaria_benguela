@@ -22,25 +22,23 @@ class TratamentoController extends Controller
     public function store(Request $request)
     {
         try {
-             // Regras de validação
-        $rules = [
-            'tratamento' => ['required', 'string', 'min:3', 'max:100'],
-            'id_caderneta' => ['required', 'exists:cadernetas,id'],
-        ];
+             //DEFINIR REGRAS DE VALIDAÇÃO
+                $rules = [
+                'tratamento' => ['required', 'string', 'regex:/^[a-zA-ZÀ-ÿ\s]+$/'],
+                
+            ];
 
-        $messages = [
-            'tratamento.required' => 'O tratamento é obrigatório!',
-            'id_caderneta.required' => 'A caderneta é obrigatória!',
-            'id_caderneta.exists' => 'A caderneta selecionada não existe!',
-        ];
-
-        $request->validate($rules, $messages);
-
+            $request->validate($rules, [
+                'tratamento.required' => 'O NOME É OBRIGATÓRIO!',
+                'desparasitacao.required' => 'O NOME É OBRIGATÓRIO!',
+                'tratamento.regex' => 'O NOME DEVE CONTER APENAS LETRAS!',
+                
+            ]);
             // Ajusta regras para edição
             if ($request->filled('id')) {
-                $TratamentoExistente = Tratamento::find($request->id);
-                if (!$TratamentoExistente) {
-                    return redirect()->back()->with("ERRO", "Tratamento NÃO ENCONTRADO");
+                $CadernetaExistente = Tratamento::find($request->id);
+                if (!$CadernetaExistente) {
+                    return redirect()->back()->with("ERRO", "TRATAMENTO NÃO ENCONTRADO");
                 }
             }
 
@@ -53,7 +51,7 @@ class TratamentoController extends Controller
                 : new Tratamento();
              
             $valor->tratamento = $request->tratamento;
-            $valor->disparasitacao = $request->disparasitacao;
+            $valor->desparasitacao = $request->desparasitacao;
             $valor->id_caderneta = $request->id_caderneta;
             $valor->data = now();
             $valor->id_funcionario = Auth::guard('funcionario')->id();
