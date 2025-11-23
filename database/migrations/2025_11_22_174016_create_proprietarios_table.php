@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cadernetas', function (Blueprint $table) {
+        Schema::create('proprietarios', function (Blueprint $table) {
             $table->id();
-            $table->string('nome_proprietario');
-            $table->string('endereco');
+            $table->string('nome');
             $table->string('provincia');
-            $table->string('n_registo');
-            $table->string('data');
+            $table->string('municipio');
+            $table->string('bairro');
+            $table->string('telefone');
+            $table->string('email');
+            $table->string('n_bi');
             $table->string('id_funcionario')->constrained('funcionario')->onDelete('cascade');
             $table->timestamps();
         });
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cadernetas');
+        Schema::dropIfExists('proprietarios');
     }
 };

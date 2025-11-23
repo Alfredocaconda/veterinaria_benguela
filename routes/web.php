@@ -1,8 +1,10 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
+    AnimalController,
     CadernetaController,
     FuncionarioController,
+    ProprietarioController,
     TratamentoController,
     VacinacaoRaivaController,
 };
@@ -23,6 +25,9 @@ Route::middleware('auth:funcionario')->group(function () {
     Route::resource('funcio', FuncionarioController::class);
     Route::get('apagar/{id}/funcio', [FuncionarioController::class, 'apagar'])
         ->name('funcio.apagar');
+    Route::resource('prop', ProprietarioController::class);
+    Route::get('apagar/{id}/prop', [ProprietarioController::class, 'apagar'])
+        ->name('prop.apagar');
     Route::resource('cadern', CadernetaController::class);
     Route::get('apagar/{id}/cadern', [CadernetaController::class, 'apagar'])
         ->name('cadern.apagar');
@@ -32,6 +37,9 @@ Route::middleware('auth:funcionario')->group(function () {
     Route::resource('vaci', VacinacaoRaivaController::class);
     Route::get('apagar/{id}/vaci', [VacinacaoRaivaController::class, 'apagar'])
         ->name('vaci.apagar');
+    Route::resource('animal', AnimalController::class);
+    Route::get('apagar/{id}/animal', [AnimalController::class, 'apagar'])
+        ->name('animal.apagar');
 });
 
        

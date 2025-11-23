@@ -65,12 +65,32 @@
 
                         <!-- Itens que Diretor e Secretário podem acessar -->
                         @if(in_array($funcionario?->cargo, ['Diretor', 'Secretario']))
-                            <li>
-                                <a href="{{ route('cadern.index') }}" class="svg-icon">
-                                    <i class="fa fa-file"></i>
-                                    <span class="ml-4">Caderneta de Vacinação</span>
+                        <li>
+                                <a href="{{ route('prop.index') }}" class="svg-icon">
+                                    <i class="fa fa-user"></i>
+                                    <span class="ml-4">Responsavel dos Animais</span>
                                 </a>
                             </li>
+
+                            <li>
+                                <a href="{{ route('animal.index') }}" class="svg-icon">
+                                    <i class="fa fa-dog"></i>
+                                    <span class="ml-4">Animal</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('cadern.index') }}" class="svg-icon">
+                                    <i class="fa fa-book"></i>
+                                    <span class="ml-4">Caderneta</span>
+                                </a>
+                            </li>
+                             <li>
+                                <a href="{{ route('vaci.index') }}" class="svg-icon">
+                                    <i class="fa fa-syringe"></i>
+                                    <span class="ml-4">Vacinação</span>
+                                </a>
+                            </li>
+                            
 
                             <li>
                                 <a href="{{ route('trat.index') }}" class="svg-icon">
@@ -78,13 +98,8 @@
                                     <span class="ml-4">Tratamento</span>
                                 </a>
                             </li>
-
-                            <li>
-                                <a href="{{ route('vaci.index') }}" class="svg-icon">
-                                    <i class="fa fa-syringe"></i>
-                                    <span class="ml-4">Vacinação</span>
-                                </a>
-                            </li>
+                            
+                           
                         @endif
                     </ul>
                 </nav>
