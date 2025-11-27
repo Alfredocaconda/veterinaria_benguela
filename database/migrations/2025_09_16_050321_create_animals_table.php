@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('ondulada');
             $table->string('cor');
             $table->string('cauda_comprida');
-            $table->string('id_proprietario')->constrained('proprietario')->onDelete('cascade');
-            $table->string('id_funcionario')->constrained('funcionario')->onDelete('cascade');
+            $table->string('id_proprietario')->constrained('proprietarios')->onDelete('cascade');
+            $table->string('id_funcionario')->constrained('funcionarios')->onDelete('cascade');
             $table->timestamps();
         });
     }

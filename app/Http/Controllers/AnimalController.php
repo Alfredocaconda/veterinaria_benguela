@@ -38,7 +38,7 @@ class AnimalController extends Controller
             if ($request->filled('id')) {
                 $AnimalExistente = Animal::find($request->id);
                 if (!$AnimalExistente) {
-                    return redirect()->back()->with("ERRO", "Animal NÃO ENCONTRADO");
+                    return redirect()->back()->with("ERRO", "ANIMAL NÃO ENCONTRADO");
                 }
             }
 
@@ -87,6 +87,6 @@ class AnimalController extends Controller
     {
         //
         Animal::find($id)->delete();
-        return redirect()->back()->with("SUCESSO","Animal ELIMINADO");
+        return redirect()->back()->with("SUCESSO","ANIMAL ELIMINADO");
     }
 }

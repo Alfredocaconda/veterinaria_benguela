@@ -12,19 +12,30 @@
             <div class="head-body">
                 <div class="container-fluid">
                     <div class="row">
-                       @foreach (App\Models\Caderneta::all() as $item)
+                       @foreach (App\Models\Caderneta::with(['animal.proprietario'])->get() as $item)
                             <div class="col-12 col-md-2 col-lg-2 base-rotas">
                                 <a href="javascript:void(0);"
-                                onclick="abrirModal('{{ $item->id }}', '{{ $item->nome_animal .' / '. $item->genero_animal  .' / '. $item->raca.' / '. $item->idade_animal.' Anos' .' / '.$item->cor }}')">
+                                    onclick="abrirModal(
+                                        '{{ $item->id }}',
+                                        '{{ $item->animal->nome .' / '. $item->animal->genero .' / '. $item->animal->raca .' / '. $item->animal->idade .' Anos / '. $item->animal->cor }}'
+                                    )">
                                     <div class="rotas">
-                                        <h4>{{ $item->nome_animal ." / ".$item->genero_animal ." / ". $item->raca." / ". $item->idade_animal." Anos" ." / ".$item->cor }}</h4>
+                                        <h4>
+                                            {{ $item->animal->nome ." / ". $item->animal->genero ." / ". $item->animal->raca." / ". $item->animal->idade." Anos / ".$item->animal->cor }}
+                                        </h4>
+
                                         --------------
+
                                         <h4>{{ $item->n_registo }}</h4>
-                                        <h5>{{ $item->nome_proprietario }}</h5>
+
+                                        <h5>
+                                            Proprietário: {{ $item->animal->proprietario->nome }}
+                                        </h5>
                                     </div>
                                 </a>
                             </div>
                         @endforeach
+
                     </div>
                 </div>
             </div>
@@ -53,7 +64,7 @@
                     <tbody>
                         @foreach ($valor as $func)
                             <tr>
-                                <td>{{$func->caderneta->nome_animal}}</td>
+                                <td>{{$func->caderneta->animal->nome}}</td>
                                 <td>{{$func->tratamento}}</td>
                                 <td>{{$func->desparasitacao}}</td>
                                 <td>{{$func->data}}</td>
@@ -106,8 +117,8 @@
                         <input type="hidden" name="id_caderneta" id="id_caderneta">
                         <div class="row">
                             <div class="col-12 mb-2">
-                                <label for="nome_animal"><strong>Animal:</strong></label>
-                                <input type="text" id="nome_animal" class="form-control" readonly>
+                                <label for="nome"><strong>Animal:</strong></label>
+                                <input type="text" id="nome" class="form-control" readonly>
                             </div>
                             <x-input-normal id="tratamento" name="tratamento" type="text" titulo="Tratamento" alert="" />
                              <div class="form-group col-12 col-md-6 col-lg-6">

@@ -7,9 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 class Caderneta extends Model
 {
     //
-     public function funcionario(){
+    public function funcionario(){
         return $this->belongsTo(Funcionario::class,'id_funcionario');
     }
+    public function animal()
+    {
+        return $this->belongsTo(Animal::class, 'id_animal');
+    }
+
+    public function proprietario()
+    {
+        return $this->belongsTo(Proprietario::class, 'id_proprietario');
+    }
+
       protected static function boot()
     {
         parent::boot();

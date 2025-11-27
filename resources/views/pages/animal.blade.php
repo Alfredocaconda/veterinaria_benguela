@@ -148,6 +148,7 @@
                             </div>  
                             <x-input-normal id="cor" name="cor" type="text" titulo="COR DO ANIMAL" alert="" />
                             <div class="form-group col-12 col-md-6 col-lg-6">
+                                 <label for="cauda_comprida">Selecionar o Responsavel<span style="color: red;">*</span></label>
                                     <select class="form-control" name="responsavel" id="responsavel">
                                         @foreach (App\Models\proprietario::orderBy('nome','ASC')->get() as $funcio)
                                             <option value="{{ $funcio->id }}">{{ $funcio->nome }}</option>

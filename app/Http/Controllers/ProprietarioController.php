@@ -40,7 +40,7 @@ class ProprietarioController extends Controller
             if ($request->filled('id')) {
                 $ProprietarioExistente = Proprietario::find($request->id);
                 if (!$ProprietarioExistente) {
-                    return redirect()->back()->with("ERRO", "Proprietario NÃO ENCONTRADO");
+                    return redirect()->back()->with("ERRO", "RESPONSAVEL NÃO ENCONTRADO");
                 }
             }
             // Validação
@@ -59,10 +59,10 @@ class ProprietarioController extends Controller
             $valor->id_funcionario = Auth::guard('funcionario')->id();
             $valor->save();
 
-            return redirect()->back()->with("SUCESSO", $request->filled('id') ? "Proprietario DE VACINAÇÃO ACTUALIZADO COM SUCESSO" : "Proprietario DE VACINAÇÃO CADASTRADO COM SUCESSO");
+            return redirect()->back()->with("SUCESSO", $request->filled('id') ? "RESPONSAVEL ACTUALIZADO COM SUCESSO" : "Proprietario DE VACINAÇÃO CADASTRADO COM SUCESSO");
 
         } catch (QueryException $e) {
-            return redirect()->back()->with("ERRO", "ERRO AO SALVAR Proprietario DE VACINAÇÃO. TENTE NOVAMENTE");
+            return redirect()->back()->with("ERRO", "ERRO AO SALVAR RESPONSAVEL. TENTE NOVAMENTE");
         }
     }
 

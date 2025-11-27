@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('telefone');
             $table->string('email');
             $table->string('n_bi');
-            $table->string('id_funcionario')->constrained('funcionario')->onDelete('cascade');
+            $table->string('id_funcionario')->constrained('funcionarios')->onDelete('cascade');
             $table->timestamps();
         });
     }

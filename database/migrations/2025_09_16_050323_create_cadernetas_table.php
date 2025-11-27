@@ -13,12 +13,19 @@ return new class extends Migration
     {
         Schema::create('cadernetas', function (Blueprint $table) {
             $table->id();
-            $table->string('nome_proprietario');
-            $table->string('endereco');
-            $table->string('provincia');
             $table->string('n_registo');
             $table->string('data');
-            $table->string('id_funcionario')->constrained('funcionario')->onDelete('cascade');
+            $table->foreignId('id_animal')
+              ->constrained('animals')
+              ->onDelete('cascade');
+
+        $table->foreignId('id_proprietario')
+              ->constrained('proprietarios')
+              ->onDelete('cascade');
+
+        $table->foreignId('id_funcionario')
+              ->constrained('funcionarios')
+              ->onDelete('cascade');
             $table->timestamps();
         });
     }
