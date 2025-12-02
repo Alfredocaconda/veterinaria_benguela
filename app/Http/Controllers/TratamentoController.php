@@ -6,6 +6,8 @@ use App\Models\Tratamento;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
+use Plank\Mediable\Facades\MediaUploader;
+use PDF;
 
 class TratamentoController extends Controller
 {

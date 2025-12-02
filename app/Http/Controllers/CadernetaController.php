@@ -8,6 +8,8 @@ use App\Models\Proprietario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
+use Plank\Mediable\Facades\MediaUploader;
+use PDF;
 
 class CadernetaController extends Controller
 {
@@ -78,5 +80,12 @@ class CadernetaController extends Controller
         //
         Caderneta::find($id)->delete();
         return redirect()->back()->with("SUCESSO","CADERNETA DE VACINAÇÃO ELIMINADO");
+    }
+    //Gerar o comprovativo
+    public function gerarPdf($id)
+    {
+        $animal = Caderneta::with('proprietario','animal')->findOrFail($id);
+        $pdf = Pdf::loadView('pages.pdfs.pdf_caderneta', compact('animal'));
+        return $pdf->stream("animal_{$animal->nome}.pdf");
     }
 }

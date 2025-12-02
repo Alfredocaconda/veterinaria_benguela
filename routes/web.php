@@ -40,6 +40,8 @@ Route::middleware('auth:funcionario')->group(function () {
     Route::resource('animal', AnimalController::class);
     Route::get('apagar/{id}/animal', [AnimalController::class, 'apagar'])
         ->name('animal.apagar');
+    Route::get('/animal/pdf/{id}', [AnimalController::class, 'gerarPdf'])->name('animal.pdf');
+    Route::get('/caderneta/pdf/{id}', [CadernetaController::class, 'gerarPdf'])->name('caderneta.pdf');
 });
 
        

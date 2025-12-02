@@ -6,6 +6,8 @@ use App\Models\Animal;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Plank\Mediable\Facades\MediaUploader;
+use PDF;
 
 class AnimalController extends Controller
 {
@@ -88,5 +90,12 @@ class AnimalController extends Controller
         //
         Animal::find($id)->delete();
         return redirect()->back()->with("SUCESSO","ANIMAL ELIMINADO");
+    }
+    //Gerar o comprovativo
+    public function gerarPdf($id)
+    {
+        $animal = Animal::with('proprietario')->findOrFail($id);
+        $pdf = Pdf::loadView('pages.pdfs.pdf_animal', compact('animal'));
+        return $pdf->stream("animal_{$animal->nome}.pdf");
     }
 }

@@ -46,6 +46,9 @@
                                 <td>{{$func->cauda_comprida}}</td>
                                 <td>{{$func->proprietario->nome}}</td>
                                 <td>
+                                    <a href="{{ route('animal.pdf', $func->id) }}" class="btn btn-sm btn-secondary" target="_blank">Gerar Pdf</a>
+                                </td>
+                                <td>
                                     <a href="#Cadastrar" data-toggle="modal" class="text-primary" onclick="editar({{ json_encode($func) }})"><i class="fa fa-edit"></i></a>
                                     <a href="{{route('animal.apagar',$func->id)}}" class="text-danger"><i class="fa fa-trash"></i></a>
                                 </td>
